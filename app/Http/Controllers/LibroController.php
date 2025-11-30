@@ -108,4 +108,15 @@ class LibroController extends Controller
         $libro->delete();
         return "ok";
     }
+
+    public function buscar_libros_resenas(Request $request)
+    {
+        $texto = strtolower($request->texto); // convertir a minúsculas
+
+        $query = Libro::leftJoin('resena', 'libro.id', '=', 'resena.id_libro')
+            ->select('libro.nombre_libro')
+            ->whereRaw('LOWER(libro.nombre_libro) LIKE ?', ["%{$texto}%"]);
+
+        return $query->get();
+    }
 }
