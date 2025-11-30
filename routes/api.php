@@ -73,3 +73,6 @@ Route::middleware([CorsMiddleware::class])->post('password/email', [PasswordCont
 //Route::post('password/email', [PasswordController::class, 'sendResetLinkEmail']);
 
 //Route::middleware([CorsMiddleware::class])->post('password/email', [ForgotPasswordController::class, 'sendResetLinkEmail']);
+
+
+Route::post('libros/resenas/buscar', [LibroController::class, 'buscar_libros_resenas']);
