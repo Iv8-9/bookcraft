@@ -16,15 +16,38 @@ class LibroController extends Controller
     public function libros_resena()
     {
         $libro = Libro::query()
+            ->join('resena', 'libro.id', '=', 'resena.id_libro')
+            ->select(
+                'libro.*',
+                'libro.id AS id_libro',
+                'resena.id AS id_resena'
+            )
+            ->get();
+        return $libro;
+    }
+
+    public function busqueda_resena(Request $request)
+{
+    // 1. Convertir la cadena de búsqueda a minúsculas
+    $busqueda = strtolower(trim($request->nombre_libro));
+
+    $libros = Libro::query()
         ->join('resena', 'libro.id', '=', 'resena.id_libro')
+
+        // 2. Aplicar la función SQL 'LOWER()' al campo de la tabla
+        // Esto compara el campo 'nombre_libro' (convertido a minúsculas)
+        // con la variable de búsqueda (ya convertida a minúsculas).
+        ->whereRaw('LOWER(libro.nombre_libro) LIKE ?', ['%' . $busqueda . '%'])
+
         ->select(
             'libro.*',
             'libro.id AS id_libro',
             'resena.id AS id_resena'
         )
         ->get();
-        return $libro;
-    }
+
+    return $libros;
+}
 
     public function show(Request $request)
     {

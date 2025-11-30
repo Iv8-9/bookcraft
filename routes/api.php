@@ -37,6 +37,7 @@ Route::post('estatus/delete', [EstatusController::class, 'destroy'])->name('esta
 Route::post('libro/new', [LibroController::class, 'store'])->name('libro/new');
 Route::post('libros', [LibroController::class, 'index'])->name('libros/new');
 Route::post('libros/resenas', [LibroController::class, 'libros_resena'])->name('libros/resenas');
+Route::post('libros/resenas/busqueda', [LibroController::class, 'busqueda_resena'])->name('libros/resenas/busqueda');
 Route::post('libro', [LibroController::class, 'show'])->name('libro');
 Route::post('libros/lector', [LibroController::class, 'show_libros_lector'])->name('libros/lector');
 Route::post('libros/lector/completo', [LibroController::class, 'show_libros_resena_lector'])->name('libros/lector/completo');
