@@ -12,8 +12,9 @@ return new class extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->text('app_lector')->nullable();
             $table->text('apm_lector')->nullable();
+            $table->text('usuario')->unique();
             $table->integer('edad')->nullable();
-            $table->text('fecha_nacimiento')->nullable();
+            $table->date('fecha_nacimiento')->nullable();
             $table->boolean('suscripcion')->default(false)->nullable();
         });
     }
@@ -22,6 +23,7 @@ return new class extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->dropColumn('app_lector');
             $table->dropColumn('apm_lector');
+            $table->dropColumn('usuario');
             $table->dropColumn('edad');
             $table->dropColumn('fecha_nacimiento');
             $table->dropColumn('suscripcion');

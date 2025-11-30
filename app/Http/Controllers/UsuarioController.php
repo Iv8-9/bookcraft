@@ -22,9 +22,9 @@ class UsuarioController extends Controller
 
     public function store(Request $request)
     {
-        if ($request->id==0) {
+        if ($request->id == 0) {
             $users = new Usuario();
-        }else {
+        } else {
             $users = Usuario::find($request->id);
         }
 
@@ -37,6 +37,7 @@ class UsuarioController extends Controller
 
         $users->app_lector = $request->app_lector;
         $users->apm_lector = $request->apm_lector;
+        $users->usuario = $request->usuario;
         $users->edad = $request->edad;
         $users->fecha_nacimiento = $request->fecha_nacimiento;
         $users->suscripcion = $request->suscripcion;
@@ -46,17 +47,25 @@ class UsuarioController extends Controller
         return "ok";
     }
 
-        public function update(Request $request)
+    public function update(Request $request)
     {
-        if ($request->id==0) {
+        if ($request->id == 0) {
             $users = new Usuario();
-        }else {
+        } else {
             $users = Usuario::find($request->id);
         }
 
         $users->name = $request->name;
         $users->app_lector = $request->app_lector;
         $users->apm_lector = $request->apm_lector;
+        $users->save();
+        return "ok";
+    }
+
+    public function premium(Request $request)
+    {
+        $users = Usuario::find($request->id);
+        $users->suscripcion = true;
         $users->save();
         return "ok";
     }
